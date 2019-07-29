@@ -20,7 +20,6 @@ def add():
     if add.validate_on_submit():
         task = add.task.data
         content = Todo_item(content=task)
-        # print(task, content)
         db.session.add(content)
         db.session.commit()
 
@@ -36,10 +35,8 @@ def remove():
     rem = RemoveForm()
     if rem.validate_on_submit():
         value = rem.task.data
-        print('c ',value)
         try:
             task = Todo_item.query.filter_by(content=value).first()
-            print(task, 'THIS IS TASK')
             db.session.delete(task)
             db.session.commit()
         except:

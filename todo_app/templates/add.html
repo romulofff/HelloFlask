@@ -1,0 +1,20 @@
+{% extends 'index.html'%}
+
+{% block content %}
+<form action="" method="POST">
+    {{ form.csrf_token }}
+    <!-- <input type="text" class="form-control" placeholder="Your Task" name="task"> -->
+    <div class="form-group">
+        <label>Task</label>
+        {{form.task(class="form-control", placeholder="Task")}}
+        {% if form.errors.task %}
+        <div class="alert alert-danger" role="alert">
+            {{ form.errors.task }}
+        </div>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+    
+    <ul class="list-unstyled" id="todo"></ul>
+</form>
+{% endblock %}  

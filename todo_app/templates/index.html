@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<body>
+    <div class="form-group">
+      <h1>To-Do <small>List</small></h1>
+      
+      {% if request.path == "/remove" %}
+      <li><a href="{{ url_for('view.add') }}" class="btn btn-primary">Add</a> </li>
+      {% endif %}
+
+      {% if request.path == "/add" %}
+      <li><a href="{{ url_for('view.remove') }}" class="btn btn-primary">Remove</a></li>
+      {% endif %}
+
+      {% if request.path == "/" or request.path == "/index" %}
+      <ul><a href="{{ url_for('view.add') }}" class="btn btn-primary">Add</a> 
+        <a href="{{ url_for('view.remove') }}" class="btn btn-primary">Remove</a> </ul>
+      
+      {% endif %}
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning">
+            <ul class=flashes>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+              </ul>
+        {% endif %}
+    {% endwith %}
+
+
+    <div>
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <div>
+        <h3>Your Tasks:</h3>
+        <br>    
+        {% for item in tasks %}
+        <tr>
+            <li> {{item.content}}</li>
+            <br>
+        </tr>
+        {% endfor %}
+    </div>
+</body>
